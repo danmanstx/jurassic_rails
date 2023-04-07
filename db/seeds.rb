@@ -33,3 +33,6 @@ Dinosaur.create!(name: 'Mike', species_id: 3, cage_id: 4)
 Dinosaur.create!(name: 'John', species_id: 4, cage_id: 5)
 Dinosaur.create!(name: 'Brachy', species_id: 3, cage_id: 6)
 Dinosaur.create!(name: 'Brachytwo', species_id: 3, cage_id: 6)
+
+# Reset the counters
+Cage.find_each { |cage| Cage.reset_counters(cage.id, :dinosaurs) }

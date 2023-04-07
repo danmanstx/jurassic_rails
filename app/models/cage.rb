@@ -15,7 +15,7 @@ class Cage < ApplicationRecord
   scope :expanded, -> { with_dinos.to_json(include: :dinosaurs) }
 
   def current_capacity
-    dinosaurs.count
+    dinosaurs.size
   end
 
   def power_on
