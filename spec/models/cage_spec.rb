@@ -13,8 +13,9 @@ RSpec.describe Cage, type: :model do
     it 'validates that the cage is not over capacity' do
       cage = create(:cage, capacity: 1)
       species = create(:species, name: 'Trex', diet: :carnivore)
-      dinosaur = create(:dinosaur, cage: cage, species: species)
-      dinosaur2 = create(:dinosaur, cage: cage, species: species)
+      dinosaur = create(:dinosaur, cage:, species:)
+      dinosaur2 = create(:dinosaur, cage:, species:)
+      cage.reload
       expect(cage).to_not be_valid
     end
 
@@ -23,6 +24,7 @@ RSpec.describe Cage, type: :model do
       species = create(:species, name: 'Trex', diet: :carnivore)
       dinosaur = create(:dinosaur, cage:, species:)
       cage.update(power_status: :down)
+      cage.reload
       expect(cage).to_not be_valid
     end
   end
@@ -56,6 +58,7 @@ RSpec.describe Cage, type: :model do
 
     describe '#current_capacity' do
       it 'returns the number of dinosaurs currently in the cage' do
+        cage.reload
         expect(cage.current_capacity).to eq(1)
       end
     end
@@ -76,10 +79,10 @@ RSpec.describe Cage, type: :model do
       end
 
       it 'returns false and adds an error if the cage is powered on and not empty' do
+        cage.reload
         expect(cage.power_off).to eq(false)
         expect(cage.errors.full_messages).to eq(['Cage is not empty and cannot be powered off'])
       end
     end
   end
 end
-

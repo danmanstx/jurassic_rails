@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2023_04_07_170622) do
     t.integer "power_status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "dinosaurs_count"
+    t.integer "dinosaurs_count", default: 0, null: false
   end
 
   create_table "dinosaurs", force: :cascade do |t|

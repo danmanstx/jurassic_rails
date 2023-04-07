@@ -42,7 +42,7 @@ RSpec.describe Api::V1::CagesController, type: :request do
       it 'returns all cages with dinosaurs' do
         expect(JSON.parse(response.body)).not_to be_empty
         expect(JSON.parse(response.body).size).to eq(5)
-        expect(JSON.parse(response.body).first['dinosaurs']).not_to be_empty
+        expect(JSON.parse(response.body).last['dinosaurs']).not_to be_empty
       end
 
       it 'returns status code 200' do
