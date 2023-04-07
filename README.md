@@ -24,7 +24,7 @@ It's 1993 and you're the lead software developer for the new Jurassic Park! Park
 - [x] Use Carnivore dinosaurs like Tyrannosaurus, Velociraptor, Spinosaurus and Megalosaurus.
 - [x] Use Herbivores like Brachiosaurus, Stegosaurus, Ankylosaurus and Triceratops.
 
-these example dinos are included with the `seed` file
+  * these example dinos are included with the `seed` file
 
 ## technical requirements
 - [x] This project should be done in Ruby on Rails 6 or newer.

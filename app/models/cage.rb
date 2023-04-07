@@ -9,6 +9,7 @@ class Cage < ApplicationRecord
   validate :occupancy
   validate :power_off_dino_check, on: %i[update create]
   validate :carnivore_species_only
+  validate :herbivore_only
 
   scope :by_status, ->(power_status) { where(power_status:) if power_status.present? }
   scope :with_dinos, -> { includes(:dinosaurs) }
@@ -42,10 +43,17 @@ class Cage < ApplicationRecord
     errors.add(:cage, 'is at max capacity') if current_capacity >= capacity
   end
 
+  def herbivore_only
+    return if dinosaurs.empty? || dinosaurs.by_diet(:carnivore).empty?
+    return if dinosaurs.by_diet(:herbivore).empty?
+
+    errors.add(:dinosaur, 'Herbivores can only be in a cage with other herbivores.')
+  end
+
   def carnivore_species_only
     carnivores = dinosaurs.by_diet(:carnivore)
     return if carnivores.empty? || carnivores.map(&:species).uniq.length == 1
 
-    errors.add(:dinosaurs, 'Carnivores can only be in a cage with other dinosaurs of the same species.')
+    errors.add(:dinosaur, 'Carnivores can only be in a cage with other dinosaurs of the same species.')
   end
 end
