@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
+# app/controllers/api/v1/species_controller.rb
 class Api::V1::SpeciesController < ApplicationController
-  before_action :set_species, only: [:show, :update, :destroy]
+  before_action :set_species, only: %i[show update destroy]
 
   # GET /species
   def index
     @species = Species.all
-
     render json: @species
   end
 

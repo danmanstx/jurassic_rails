@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
+# app/controllers/api/v1/cages_controller.rb
 class Api::V1::CagesController < ApplicationController
-  before_action :set_cage, only: [:show, :update ]
+  before_action :set_cage, only: %i[show update]
 
   # GET /cages
   def index

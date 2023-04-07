@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 # app/models/cage.rb
 class Cage < ApplicationRecord
-  enum power_status: { down: 0, active: 1}
+  enum power_status: { down: 0, active: 1 }
   has_many :dinosaurs, dependent: :nullify
 
   validates :capacity, numericality: { greater_than: 0 }
@@ -37,7 +39,7 @@ class Cage < ApplicationRecord
   end
 
   def occupancy
-    errors.add(:cage, 'is add max capacity') if current_capacity > capacity
+    errors.add(:cage, 'is at max capacity') if current_capacity >= capacity
   end
 
   def carnivore_species_only

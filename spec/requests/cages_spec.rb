@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Api::V1::CagesController, type: :request do
   let!(:cages) { create_list(:cage, 5) }
   let(:cage_id) { cages.first.id }
   let!(:species) { create(:species, name: 'Trex', diet: :carnivore) }
-  let!(:dinosaur1) { create(:dinosaur, cage: cages.first, species: species) }
-  let!(:dinosaur2) { create(:dinosaur, cage: cages.first, species: species) }
+  let!(:dinosaur1) { create(:dinosaur, cage: cages.first, species:) }
+  let!(:dinosaur2) { create(:dinosaur, cage: cages.first, species:) }
 
   describe 'GET /api/v1/cages' do
     context 'when power status is present' do
@@ -84,7 +86,7 @@ RSpec.describe Api::V1::CagesController, type: :request do
       before { post '/api/v1/cages', params: { name: 'Cage 1', capacity: -1 } }
 
       it 'returns a validation failure message' do
-        expect(response.body).to include("must be greater than 0")
+        expect(response.body).to include('must be greater than 0')
       end
 
       it 'returns status code 422' do

@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
+# app/controllers/api/v1/dinosaurs_controller.rb
 class Api::V1::DinosaursController < ApplicationController
-  before_action :set_dinosaur, only: [:show, :update, :destroy]
+  before_action :set_dinosaur, only: %i[show update destroy]
 
   # GET /dinosaurs or GET /cages/:cage_id/dinosaurs
   def index
